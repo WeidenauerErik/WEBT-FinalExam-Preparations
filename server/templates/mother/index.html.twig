@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mother index{% endblock %}
+
+{% block body %}
+    <h1>Mother index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Birthyear</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for mother in mothers %}
+            <tr>
+                <td>{{ mother.id }}</td>
+                <td>{{ mother.name }}</td>
+                <td>{{ mother.birthyear ? mother.birthyear|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_mother_show', {'id': mother.id}) }}">show</a>
+                    <a href="{{ path('app_mother_edit', {'id': mother.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_mother_new') }}">Create new</a>
+{% endblock %}
